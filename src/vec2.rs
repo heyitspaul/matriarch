@@ -7,18 +7,24 @@ pub struct Vec2 {
 }
 
 impl Vec2 {
+
+    /// Returns a new Vec2 at [0, 0].
     pub fn new() -> Vec2 {
         Vec2 { x: 0.0, y: 0.0 }
     }
 
+    /// Returns a new Vec2 using the given values for x and y.
     pub fn new_from_values(x: &f32, y: &f32) -> Vec2 {
         Vec2 { x: *x, y: *y }
     }
 
+    /// Returns a new Vec2 using the 0 and 1 indices of the given array,
+    /// where [0] -> x, and [1] -> y.
     pub fn new_from_array(input: &[f32]) -> Vec2 {
         Vec2 { x: input[0], y: input[1] }
     }
 
+    /// Returns an array of the Vec2's x and y values where x -> [0], y -> [1].
     pub fn to_array(&self) -> [f32; 2] {
         [ self.x, self.y ]
     }
@@ -27,6 +33,7 @@ impl Vec2 {
 impl ops::Add<Vec2> for Vec2 {
     type Output = Vec2;
 
+    /// Adds one Vec2 to another Vec2 and returns a new Vec2.
     fn add(self, other_vec2: Vec2) -> Vec2 {
         let mut new_vec2 = Vec2::new();
         new_vec2.x = self.x + other_vec2.x;
@@ -38,6 +45,7 @@ impl ops::Add<Vec2> for Vec2 {
 impl ops::Sub<Vec2> for Vec2 {
     type Output = Vec2;
 
+    /// Subtracts one Vec2 from another Vec2 and returns a new Vec2.
     fn sub(self, other_vec2: Vec2) -> Vec2 {
         let mut new_vec2 = Vec2::new();
         new_vec2.x = self.x - other_vec2.x;
