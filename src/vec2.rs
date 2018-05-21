@@ -20,7 +20,7 @@ impl Vec2 {
 
     /// Returns a new Vec2 using the 0 and 1 indices of the given array,
     /// where [0] -> x, and [1] -> y.
-    pub fn new_from_array(input: &[f32]) -> Vec2 {
+    pub fn new_from_array(input: &[f32; 2]) -> Vec2 {
         Vec2 { x: input[0], y: input[1] }
     }
 
@@ -118,7 +118,7 @@ mod tests {
 
     #[test]
     fn create_new_vec2_from_array() {
-        let input_array = [ 1.0, 2.5];
+        let input_array = [ 1.0, 2.5 ];
         let vec = Vec2::new_from_array(&input_array);
         assert_eq!(vec, Vec2 { x: 1.0, y: 2.5 });
     }
