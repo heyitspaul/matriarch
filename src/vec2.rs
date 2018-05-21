@@ -35,10 +35,31 @@ impl ops::Add<Vec2> for Vec2 {
 
     /// Adds one Vec2 to another Vec2 and returns a new Vec2.
     fn add(self, other_vec2: Vec2) -> Vec2 {
-        let mut new_vec2 = Vec2::new();
-        new_vec2.x = self.x + other_vec2.x;
-        new_vec2.y = self.y + other_vec2.y;
-        new_vec2
+        Vec2 {
+            x: self.x + other_vec2.x,
+            y: self.y + other_vec2.y
+        }
+    }
+}
+
+impl ops::AddAssign for Vec2 {
+
+    /// Adds one Vec2 to another Vec2 and re-assigns the first Vec2 to the
+    /// new Vec2.
+    fn add_assign(&mut self, other_vec2: Vec2) {
+        *self = Vec2 {
+            x: self.x + other_vec2.x,
+            y: self.y + other_vec2.y
+        };
+    }
+}
+
+impl ops::Neg for Vec2 {
+    type Output = Vec2;
+
+    /// Negates the values of Vec2, which in turn negates the Vec2
+    fn neg(self) -> Vec2 {
+        return Vec2{ x: -self.x, y: -self.y }
     }
 }
 
@@ -47,10 +68,22 @@ impl ops::Sub<Vec2> for Vec2 {
 
     /// Subtracts one Vec2 from another Vec2 and returns a new Vec2.
     fn sub(self, other_vec2: Vec2) -> Vec2 {
-        let mut new_vec2 = Vec2::new();
-        new_vec2.x = self.x - other_vec2.x;
-        new_vec2.y = self.y - other_vec2.y;
-        new_vec2
+        Vec2 {
+            x: self.x - other_vec2.x,
+            y: self.y - other_vec2.y
+        }
+    }
+}
+
+impl ops::SubAssign for Vec2 {
+
+    /// Subtracts one Vec2 from another Vec2 and re-assigns the first Vec2 to
+    /// the new Vec2.
+    fn sub_assign(&mut self, other_vec2: Vec2) {
+        *self = Vec2 {
+            x: self.x - other_vec2.x,
+            y: self.y - other_vec2.y
+        };
     }
 }
 
@@ -94,10 +127,26 @@ mod tests {
     }
 
     #[test]
+    fn add_assign_2_vec2s() {
+        let mut v1 = Vec2 { x: 1.0, y: 0.0 };
+        let v2 = Vec2 { x: 0.0, y: 1.0 };
+        v1 += v2;
+        assert_eq!(v1, Vec2 { x: 1.0, y: 1.0 });
+    }
+
+    #[test]
     fn subtract_2_vec2s() {
         let v1 = Vec2 { x: 1.0, y: 2.0 };
         let v2 = Vec2 { x: 1.0, y: 1.0 };
         let v3 = v1 - v2;
         assert_eq!(v3, Vec2 { x: 0.0, y: 1.0 });
+    }
+
+    #[test]
+    fn subtract_assign_2_vec2s() {
+        let mut v1 = Vec2 { x: 1.0, y: 2.0 };
+        let v2 = Vec2 { x: 1.0, y: 1.0 };
+        v1 -= v2;
+        assert_eq!(v1, Vec2 { x: 0.0, y: 1.0 });
     }
 }
