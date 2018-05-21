@@ -54,6 +54,18 @@ impl ops::AddAssign for Vec2 {
     }
 }
 
+impl ops::Mul<Vec2> for f32 {
+    type Output = Vec2;
+
+    /// Multiplies a scalar value by a Vec2 and returns a Vec2.
+    fn mul(self, other_vec2: Vec2) -> Vec2 {
+        Vec2 {
+            x: self * other_vec2.x,
+            y: self * other_vec2.y
+        }
+    }
+}
+
 impl ops::Neg for Vec2 {
     type Output = Vec2;
 
@@ -132,6 +144,19 @@ mod tests {
         let v2 = Vec2 { x: 0.0, y: 1.0 };
         v1 += v2;
         assert_eq!(v1, Vec2 { x: 1.0, y: 1.0 });
+    }
+
+    #[test]
+    fn multiply_a_vec2_by_a_scalar() {
+        let c = 2.0;
+        let v1 = Vec2 { x: 1.0, y: 3.5 };
+        assert_eq!(c * v1, Vec2 { x: 2.0, y: 7.0 });
+    }
+
+    #[test]
+    fn get_a_negative_vec2() {
+        let v1 = Vec2 { x: 0.0, y: 2.0 };
+        assert_eq!(-v1, Vec2 { x: 0.0, y: -2.0 });
     }
 
     #[test]
