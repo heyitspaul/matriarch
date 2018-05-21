@@ -150,7 +150,7 @@ mod tests {
     }
 
     #[test]
-    fn get_vec2_as_array() {
+    fn get_vec3_as_array() {
         let vec = Vec3 { x: 1.0, y: 3.5, z: 0.5 };
         let array = vec.to_array();
         assert_eq!(array, [1.0, 3.5, 0.5])
