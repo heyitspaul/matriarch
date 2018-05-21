@@ -31,7 +31,8 @@ impl Vec2 {
         [ self.x, self.y ]
     }
 
-    /// Returns the cross product of 2 Vec2s, which is always a Vec3.
+    /// Returns the cross product of 2 Vec2s as if they were Vec3s with a z
+    /// component of 0.
     pub fn cross_product(&self, other_vec2: &Vec2) -> Vec3 {
         Vec3 {
             x: 0.0,
@@ -91,7 +92,7 @@ impl ops::Neg for Vec2 {
 
     /// Negates the values of Vec2, which in turn negates the Vec2
     fn neg(self) -> Vec2 {
-        return Vec2{ x: -self.x, y: -self.y }
+        Vec2 { x: -self.x, y: -self.y }
     }
 }
 
