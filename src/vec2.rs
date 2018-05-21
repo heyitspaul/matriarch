@@ -1,5 +1,7 @@
 use std::ops;
 
+use ::Vec3;
+
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vec2 {
     pub x: f32,
@@ -27,6 +29,15 @@ impl Vec2 {
     /// Returns an array of the Vec2's x and y values where x -> [0], y -> [1].
     pub fn to_array(&self) -> [f32; 2] {
         [ self.x, self.y ]
+    }
+
+    /// Returns the cross product of 2 Vec2s, which is always a Vec3.
+    pub fn cross_product(&self, other_vec2: &Vec2) -> Vec3 {
+        Vec3 {
+            x: 0.0,
+            y: 0.0,
+            z: (self.x * other_vec2.y) - (self.y * other_vec2.x)
+        }
     }
 }
 
@@ -66,6 +77,15 @@ impl ops::Mul<Vec2> for f32 {
     }
 }
 
+impl ops::Mul<Vec2> for Vec2 {
+    type Output = f32;
+
+    /// Returns the dot product of 2 Vec2s, which is a scalar floating point
+    fn mul(self, other_vec2: Vec2) -> f32 {
+        (self.x * other_vec2.x) + (self.y * other_vec2.y)
+    }
+}
+
 impl ops::Neg for Vec2 {
     type Output = Vec2;
 
@@ -101,7 +121,8 @@ impl ops::SubAssign for Vec2 {
 
 #[cfg(test)]
 mod tests {
-    use vec2::Vec2;
+    use ::Vec2;
+    use ::Vec3;
 
     #[test]
     fn create_new_vec2() {
@@ -131,6 +152,13 @@ mod tests {
     }
 
     #[test]
+    fn get_cross_product() {
+        let v1 = Vec2 { x: 2.0, y: 4.5 };
+        let v2 = Vec2 { x: 3.0, y: 1.5 };
+        assert_eq!(v1.cross_product(&v2), Vec3 { x: 0.0, y: 0.0, z: -10.5 })
+    }
+
+    #[test]
     fn add_2_vec2s_together() {
         let v1 = Vec2 { x: 1.0, y: 0.0 };
         let v2 = Vec2 { x: 0.0, y: 1.0 };
@@ -151,6 +179,13 @@ mod tests {
         let c = 2.0;
         let v1 = Vec2 { x: 1.0, y: 3.5 };
         assert_eq!(c * v1, Vec2 { x: 2.0, y: 7.0 });
+    }
+
+    #[test]
+    fn get_dot_product() {
+        let vec1 = Vec2 { x: 3.0, y: 2.0 };
+        let vec2 = Vec2 { x: 3.0, y: 4.0 };
+        assert_eq!(vec1 * vec2, 17.0);
     }
 
     #[test]
