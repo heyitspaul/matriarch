@@ -9,22 +9,29 @@ pub struct Vec3 {
 
 impl Vec3 {
 
+    /// Returns a new Vec3 at [0, 0, 0].
     pub fn new() -> Vec3 {
         Vec3 { x: 0.0, y: 0.0, z: 0.0 }
     }
 
+    /// Returns a new Vec3 using the given values for x, y, and z.
     pub fn new_from_values(x: &f32, y: &f32, z: &f32) -> Vec3 {
         Vec3 { x: *x, y: *y, z: *z }
     }
 
+    /// Returns a new Vec3 using the 0, 1, and 2 indices of the given array,
+    /// where [0] -> x, [1] -> y, and [2] -> z.
     pub fn new_from_array(input: &[f32; 3]) -> Vec3 {
         Vec3 { x: input[0], y: input[1], z: input[2] }
     }
 
+    /// Returns an array of the Vec3's x, y and z values where x -> [0],
+    /// y -> [1], and z -> [2].
     pub fn to_array(&self) -> [f32; 3] {
         [ self.x, self.y, self.z ]
     }
 
+    /// Returns the cross product of 2 Vec3s as a Vec3.
     pub fn cross_product(&self, other_vec3: &Vec3) -> Vec3 {
         Vec3 {
             x: (self.y * other_vec3.z) - (self.z * other_vec3.y),
@@ -37,6 +44,7 @@ impl Vec3 {
 impl ops::Add<Vec3> for Vec3 {
     type Output = Vec3;
 
+    /// Adds one Vec3 to another Vec3 and returns a new Vec3.
     fn add(self, other_vec3: Vec3) -> Vec3 {
         Vec3 {
             x: self.x + other_vec3.x,
@@ -47,6 +55,9 @@ impl ops::Add<Vec3> for Vec3 {
 }
 
 impl ops::AddAssign for Vec3 {
+
+    /// Adds one Vec3 to another Vec3 and re-assigns the first Vec3 to the new
+    /// Vec3
     fn add_assign(&mut self, other_vec3: Vec3) {
         *self = Vec3 {
             x: self.x + other_vec3.x,
@@ -59,6 +70,7 @@ impl ops::AddAssign for Vec3 {
 impl ops::Mul<Vec3> for f32 {
     type Output = Vec3;
 
+    /// Multiplies a scalar value by a Vec3 and returns a Vec3.
     fn mul(self, other_vec3: Vec3) -> Vec3 {
         Vec3 {
             x: self * other_vec3.x,
@@ -71,6 +83,7 @@ impl ops::Mul<Vec3> for f32 {
 impl ops::Mul<Vec3> for Vec3 {
     type Output = f32;
 
+    /// Retuns the dot product of 2 Vec3s, which is a scalar floating point.
     fn mul(self, other_vec3: Vec3) -> f32 {
         (self.x * other_vec3.x) + (self.y * other_vec3.y) + (self.z * other_vec3.z)
     }
@@ -79,6 +92,7 @@ impl ops::Mul<Vec3> for Vec3 {
 impl ops::Neg for Vec3 {
     type Output = Vec3;
 
+    /// Negates the values of Vec3, which in turn negates the Vec3.
     fn neg(self) -> Vec3 {
         Vec3 { x: -self.x, y: -self.y, z: -self.z }
     }
@@ -87,6 +101,7 @@ impl ops::Neg for Vec3 {
 impl ops::Sub<Vec3> for Vec3 {
     type Output = Vec3;
 
+    /// Subtracts one Vec3 from another Vec3 and returns a new Vec3.
     fn sub(self, other_vec3: Vec3) -> Vec3 {
         Vec3 {
             x: self.x - other_vec3.x,
@@ -98,6 +113,8 @@ impl ops::Sub<Vec3> for Vec3 {
 
 impl ops::SubAssign for Vec3 {
     
+    /// Subtracts one Vec3 from another Vec3 and re-assigns the first Vec3 to
+    /// the new Vec3.
     fn sub_assign(&mut self, other_vec3: Vec3) {
         *self = Vec3 {
             x: self.x - other_vec3.x,
