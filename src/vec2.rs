@@ -14,6 +14,7 @@ impl Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
     /// let vec2 = Vec2::new();
     /// ```
     pub fn new() -> Vec2 {
@@ -24,6 +25,7 @@ impl Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
     /// let x: f32 = 1.0;
     /// let y: f32 = 2.0;
     /// let vec2 = Vec2::new_from_values(&x, &y);
@@ -37,6 +39,7 @@ impl Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
     /// let input = [ 1.0, 2.0 ];
     /// let vec2 = Vec2::new_from_array(&input);
     /// ```
@@ -48,6 +51,8 @@ impl Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// # let some_vec2 = Vec2::new();
     /// let array = some_vec2.to_array();
     /// ```
     pub fn to_array(&self) -> [f32; 2] {
@@ -63,6 +68,11 @@ impl Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// use matriarch::Vec3;
+    /// 
+    /// # let some_vec2 = Vec2::new();
+    /// # let some_other_vec2 = Vec2::new();
     /// let vec3: Vec3 = some_vec2.cross_product(&some_other_vec2);
     /// ```
     pub fn cross_product(&self, other_vec2: &Vec2) -> Vec3 {
@@ -84,6 +94,9 @@ impl ops::Add<Vec2> for Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// # let some_vec2 = Vec2::new();
+    /// # let some_other_vec2 = Vec2::new();
     /// let vec2 = some_vec2 + some_other_vec2;
     /// ```
     fn add(self, other_vec2: Vec2) -> Vec2 {
@@ -101,6 +114,9 @@ impl ops::AddAssign for Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// # let mut some_vec2 = Vec2::new();
+    /// # let some_other_vec2 = Vec2::new();
     /// some_vec2 += some_other_vec2;
     /// ```
     fn add_assign(&mut self, other_vec2: Vec2) {
@@ -118,6 +134,9 @@ impl ops::Mul<Vec2> for f32 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// # let some_scalar = 1.0;
+    /// # let some_vec2 = Vec2::new();
     /// let scaled_vec2: Vec2 = some_scalar * some_vec2;
     /// ```
     fn mul(self, other_vec2: Vec2) -> Vec2 {
@@ -135,6 +154,9 @@ impl ops::Mul<Vec2> for Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// # let some_vec2 = Vec2::new();
+    /// # let some_other_vec2 = Vec2::new();
     /// let scalar: f32 = some_vec2 * some_other_vec2;
     /// ```
     fn mul(self, other_vec2: Vec2) -> f32 {
@@ -149,6 +171,8 @@ impl ops::Neg for Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// # let some_vec2 = Vec2::new();
     /// let negated_vec2 = -some_vec2;
     /// ```
     fn neg(self) -> Vec2 {
@@ -163,6 +187,9 @@ impl ops::Sub<Vec2> for Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// # let some_vec2 = Vec2::new();
+    /// # let some_other_vec2 = Vec2::new();
     /// let vec2 = some_vec2 - some_other_vec2;
     /// ```
     fn sub(self, other_vec2: Vec2) -> Vec2 {
@@ -180,6 +207,9 @@ impl ops::SubAssign for Vec2 {
     /// 
     /// Example:
     /// ```
+    /// # use matriarch::Vec2;
+    /// # let mut some_vec2 = Vec2::new();
+    /// # let some_other_vec2 = Vec2::new();
     /// some_vec2 -= some_other_vec2;
     /// ```
     fn sub_assign(&mut self, other_vec2: Vec2) {
