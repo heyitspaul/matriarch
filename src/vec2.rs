@@ -11,30 +11,65 @@ pub struct Vec2 {
 impl Vec2 {
 
     /// Returns a new Vec2 at [0, 0].
+    /// 
+    /// Example:
+    /// ```
+    /// let vec2 = Vec2::new();
+    /// ```
     pub fn new() -> Vec2 {
         Vec2 { x: 0.0, y: 0.0 }
     }
 
     /// Returns a new Vec2 using the given values for x and y.
+    /// 
+    /// Example:
+    /// ```
+    /// let x: f32 = 1.0;
+    /// let y: f32 = 2.0;
+    /// let vec2 = Vec2::new_from_values(&x, &y);
+    /// ```
     pub fn new_from_values(x: &f32, y: &f32) -> Vec2 {
         Vec2 { x: *x, y: *y }
     }
 
     /// Returns a new Vec2 using the 0 and 1 indices of the given array,
     /// where [0] -> x, and [1] -> y.
+    /// 
+    /// Example:
+    /// ```
+    /// let input = [ 1.0, 2.0 ];
+    /// let vec2 = Vec2::new_from_array(&input);
+    /// ```
     pub fn new_from_array(input: &[f32; 2]) -> Vec2 {
         Vec2 { x: input[0], y: input[1] }
     }
 
     /// Returns an array of the Vec2's x and y values where x -> [0], y -> [1].
+    /// 
+    /// Example:
+    /// ```
+    /// let array = some_vec2.to_array();
+    /// ```
     pub fn to_array(&self) -> [f32; 2] {
         [ self.x, self.y ]
     }
 
     /// Returns the cross product of 2 Vec2s as if they were Vec3s with a z
     /// component of 0.
+    /// 
+    /// We technically can't actually cross-multiply 2 vectors
+    /// in R^2, however we can add a z component of 0 and pretend the vectors 
+    /// are in R^3 instead, which is why we get a Vec3 at the end.
+    /// 
+    /// Example:
+    /// ```
+    /// let vec3: Vec3 = some_vec2.cross_product(&some_other_vec2);
+    /// ```
     pub fn cross_product(&self, other_vec2: &Vec2) -> Vec3 {
         Vec3 {
+            // Since the formula would then be multiplying 0s for both the x 
+            // and y, we can short circuit this by just passing a 0.0 to
+            // x and y instead.
             x: 0.0,
             y: 0.0,
             z: (self.x * other_vec2.y) - (self.y * other_vec2.x)
@@ -46,6 +81,11 @@ impl ops::Add<Vec2> for Vec2 {
     type Output = Vec2;
 
     /// Adds one Vec2 to another Vec2 and returns a new Vec2.
+    /// 
+    /// Example:
+    /// ```
+    /// let vec2 = some_vec2 + some_other_vec2;
+    /// ```
     fn add(self, other_vec2: Vec2) -> Vec2 {
         Vec2 {
             x: self.x + other_vec2.x,
@@ -58,6 +98,11 @@ impl ops::AddAssign for Vec2 {
 
     /// Adds one Vec2 to another Vec2 and re-assigns the first Vec2 to the
     /// new Vec2.
+    /// 
+    /// Example:
+    /// ```
+    /// some_vec2 += some_other_vec2;
+    /// ```
     fn add_assign(&mut self, other_vec2: Vec2) {
         *self = Vec2 {
             x: self.x + other_vec2.x,
@@ -70,6 +115,11 @@ impl ops::Mul<Vec2> for f32 {
     type Output = Vec2;
 
     /// Multiplies a scalar value by a Vec2 and returns a Vec2.
+    /// 
+    /// Example:
+    /// ```
+    /// let scaled_vec2: Vec2 = some_scalar * some_vec2;
+    /// ```
     fn mul(self, other_vec2: Vec2) -> Vec2 {
         Vec2 {
             x: self * other_vec2.x,
@@ -81,7 +131,12 @@ impl ops::Mul<Vec2> for f32 {
 impl ops::Mul<Vec2> for Vec2 {
     type Output = f32;
 
-    /// Returns the dot product of 2 Vec2s, which is a scalar floating point
+    /// Returns the dot product of 2 Vec2s, which is a scalar floating point.
+    /// 
+    /// Example:
+    /// ```
+    /// let scalar: f32 = some_vec2 * some_other_vec2;
+    /// ```
     fn mul(self, other_vec2: Vec2) -> f32 {
         (self.x * other_vec2.x) + (self.y * other_vec2.y)
     }
@@ -91,6 +146,11 @@ impl ops::Neg for Vec2 {
     type Output = Vec2;
 
     /// Negates the values of Vec2, which in turn negates the Vec2
+    /// 
+    /// Example:
+    /// ```
+    /// let negated_vec2 = -some_vec2;
+    /// ```
     fn neg(self) -> Vec2 {
         Vec2 { x: -self.x, y: -self.y }
     }
@@ -100,6 +160,11 @@ impl ops::Sub<Vec2> for Vec2 {
     type Output = Vec2;
 
     /// Subtracts one Vec2 from another Vec2 and returns a new Vec2.
+    /// 
+    /// Example:
+    /// ```
+    /// let vec2 = some_vec2 - some_other_vec2;
+    /// ```
     fn sub(self, other_vec2: Vec2) -> Vec2 {
         Vec2 {
             x: self.x - other_vec2.x,
@@ -112,6 +177,11 @@ impl ops::SubAssign for Vec2 {
 
     /// Subtracts one Vec2 from another Vec2 and re-assigns the first Vec2 to
     /// the new Vec2.
+    /// 
+    /// Example:
+    /// ```
+    /// some_vec2 -= some_other_vec2;
+    /// ```
     fn sub_assign(&mut self, other_vec2: Vec2) {
         *self = Vec2 {
             x: self.x - other_vec2.x,
