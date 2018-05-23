@@ -10,28 +10,68 @@ pub struct Vec3 {
 impl Vec3 {
 
     /// Returns a new Vec3 at [0, 0, 0].
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// let vec3 = Vec3::new();
+    /// ```
     pub fn new() -> Vec3 {
         Vec3 { x: 0.0, y: 0.0, z: 0.0 }
     }
 
     /// Returns a new Vec3 using the given values for x, y, and z.
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// let x: f32 = 1.0;
+    /// let y: f32 = 2.0;
+    /// let z: f32 = 3.0;
+    /// let vec3 = Vec3::new_from_values(&x, &y, &z);
+    /// ```
     pub fn new_from_values(x: &f32, y: &f32, z: &f32) -> Vec3 {
         Vec3 { x: *x, y: *y, z: *z }
     }
 
     /// Returns a new Vec3 using the 0, 1, and 2 indices of the given array,
     /// where [0] -> x, [1] -> y, and [2] -> z.
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// let input = [ 1.0, 2.0, 3.0 ];
+    /// let vec3 = Vec3::new_from_array(&input);
+    /// ```
     pub fn new_from_array(input: &[f32; 3]) -> Vec3 {
         Vec3 { x: input[0], y: input[1], z: input[2] }
     }
 
     /// Returns an array of the Vec3's x, y and z values where x -> [0],
     /// y -> [1], and z -> [2].
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// # let some_vec3 = Vec3::new();
+    /// let array = some_vec3.to_array();
+    /// ```
     pub fn to_array(&self) -> [f32; 3] {
         [ self.x, self.y, self.z ]
     }
 
     /// Returns the cross product of 2 Vec3s as a Vec3.
+    /// 
+    /// The cross product of 2 Vec3s is defined as a Vec3 that is perpendicular
+    /// to both Vec3s.
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// # let some_vec3 = Vec3::new();
+    /// # let some_other_vec3 = Vec3::new();
+    /// let cross_product = some_vec3.cross_product(&some_other_vec3);
+    /// ```
     pub fn cross_product(&self, other_vec3: &Vec3) -> Vec3 {
         Vec3 {
             x: (self.y * other_vec3.z) - (self.z * other_vec3.y),
@@ -45,6 +85,14 @@ impl ops::Add<Vec3> for Vec3 {
     type Output = Vec3;
 
     /// Adds one Vec3 to another Vec3 and returns a new Vec3.
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// # let some_vec3 = Vec3::new();
+    /// # let some_other_vec3 = Vec3::new();
+    /// let vec3 = some_vec3 + some_other_vec3;
+    /// ```
     fn add(self, other_vec3: Vec3) -> Vec3 {
         Vec3 {
             x: self.x + other_vec3.x,
@@ -58,6 +106,14 @@ impl ops::AddAssign for Vec3 {
 
     /// Adds one Vec3 to another Vec3 and re-assigns the first Vec3 to the new
     /// Vec3
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// # let mut some_vec3 = Vec3::new();
+    /// # let some_other_vec3 = Vec3::new();
+    /// some_vec3 += some_other_vec3;
+    /// ```
     fn add_assign(&mut self, other_vec3: Vec3) {
         *self = Vec3 {
             x: self.x + other_vec3.x,
@@ -71,6 +127,14 @@ impl ops::Mul<Vec3> for f32 {
     type Output = Vec3;
 
     /// Multiplies a scalar value by a Vec3 and returns a Vec3.
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// # let some_scalar = 3.0;
+    /// # let some_vec3 = Vec3::new();
+    /// let scaled_vec3: Vec3 = some_scalar * some_vec3;
+    /// ```
     fn mul(self, other_vec3: Vec3) -> Vec3 {
         Vec3 {
             x: self * other_vec3.x,
@@ -84,6 +148,14 @@ impl ops::Mul<Vec3> for Vec3 {
     type Output = f32;
 
     /// Retuns the dot product of 2 Vec3s, which is a scalar floating point.
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// # let some_vec3 = Vec3::new();
+    /// # let some_other_vec3 = Vec3::new();
+    /// let scalar: f32 = some_vec3 * some_other_vec3;
+    /// ```
     fn mul(self, other_vec3: Vec3) -> f32 {
         (self.x * other_vec3.x) + (self.y * other_vec3.y) + (self.z * other_vec3.z)
     }
@@ -102,6 +174,14 @@ impl ops::Sub<Vec3> for Vec3 {
     type Output = Vec3;
 
     /// Subtracts one Vec3 from another Vec3 and returns a new Vec3.
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// # let some_vec3 = Vec3::new();
+    /// # let some_other_vec3 = Vec3::new();
+    /// let vec3 = some_vec3 - some_other_vec3;
+    /// ```
     fn sub(self, other_vec3: Vec3) -> Vec3 {
         Vec3 {
             x: self.x - other_vec3.x,
@@ -115,6 +195,14 @@ impl ops::SubAssign for Vec3 {
     
     /// Subtracts one Vec3 from another Vec3 and re-assigns the first Vec3 to
     /// the new Vec3.
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Vec3;
+    /// # let mut some_vec3 = Vec3::new();
+    /// # let some_other_vec3 = Vec3::new();
+    /// some_vec3 -= some_other_vec3;
+    /// ```
     fn sub_assign(&mut self, other_vec3: Vec3) {
         *self = Vec3 {
             x: self.x - other_vec3.x,
