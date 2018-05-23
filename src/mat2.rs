@@ -90,6 +90,19 @@ impl ops::Mul<Mat2> for Mat2 {
     }
 }
 
+impl ops::Mul<Vec2> for Mat2 {
+    type Output = Mat2;
+
+    fn mul(self, vec2: Vec2) -> Mat2 {
+        Mat2 {
+            a: 0.0,
+            b: 0.0,
+            c: 0.0,
+            d: 0.0
+        }
+    }
+}
+
 impl ops::Mul<Mat2> for f32 {
     type Output = Mat2;
 
@@ -112,3 +125,15 @@ impl ops::Mul<Mat2> for f32 {
     }
 }
 
+#[cfg(test)]
+mod tests {
+    use ::Vec2;
+    use ::Mat2;
+
+    #[test]
+    fn multiply_by_identity() {
+        let mat2 = Mat2::new_from_values(&2.0, &3.0, &4.0, &5.0);
+        let iden = Mat2::identity();
+        assert_eq!(mat2 * iden, mat2);
+    }
+}

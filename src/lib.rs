@@ -9,3 +9,7 @@ pub mod vec4;
 pub use vec2::Vec2;
 pub use vec3::Vec3;
 pub use vec4::Vec4;
+
+pub mod mat2;
+
+pub use mat2::Mat2;
