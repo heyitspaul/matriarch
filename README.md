@@ -1,6 +1,8 @@
 # Matriarch
 A Linear Algebra and Matrix library written in Rust.
 
+[![Build Status](https://travis-ci.com/TheAssailant/matriarch.svg?token=RmNmn4BkdYfqUQPTaHJs&branch=master)](https://travis-ci.com/TheAssailant/matriarch)
+
 ## Getting Started
 
 Simply put Matriarch in your `Cargo.toml` file:
