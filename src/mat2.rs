@@ -91,14 +91,12 @@ impl ops::Mul<Mat2> for Mat2 {
 }
 
 impl ops::Mul<Vec2> for Mat2 {
-    type Output = Mat2;
+    type Output = Vec2;
 
-    fn mul(self, vec2: Vec2) -> Mat2 {
-        Mat2 {
-            a: 0.0,
-            b: 0.0,
-            c: 0.0,
-            d: 0.0
+    fn mul(self, vec2: Vec2) -> Vec2 {
+        Vec2 {
+            x: (self.a * vec2.x) + (self.b * vec2.y),
+            y: (self.c * vec2.x) + (self.d * vec2.y)
         }
     }
 }
@@ -135,5 +133,12 @@ mod tests {
         let mat2 = Mat2::new_from_values(&2.0, &3.0, &4.0, &5.0);
         let iden = Mat2::identity();
         assert_eq!(mat2 * iden, mat2);
+    }
+
+    #[test]
+    fn multiply_mat2_by_vec2() {
+        let mat2 = Mat2::new_from_values(&1.0, &2.0, &3.0, &2.0);
+        let vec2 = Vec2::new_from_values(&4.0, &5.0);
+        assert_eq!(mat2 * vec2, Vec2::new_from_values(&14.0, &22.0));
     }
 }
