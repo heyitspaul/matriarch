@@ -36,6 +36,11 @@ impl Vec4 {
     pub fn to_array(&self) -> [f32; 4] {
         [ self.x, self.y, self.z, self.w ]
     }
+
+    /// Returns the length of the Vec4.
+    pub fn length(&self) -> f32 {
+        f32::sqrt(self.x.powi(2) + self.y.powi(2) + self.z.powi(2) + self.w.powi(2))
+    }
 }
 
 impl ops::Add<Vec4> for Vec4 {
@@ -158,6 +163,12 @@ mod tests {
         let vec = Vec4 { x: 1.0, y: 3.5, z: 0.5, w: 2.25 };
         let array = vec.to_array();
         assert_eq!(array, [ 1.0, 3.5, 0.5, 2.25 ]);
+    }
+
+    #[test]
+    fn get_vec4_length() {
+        let vec4 = Vec4 { x: 5.0, y: 5.0, z: 5.0, w: 5.0 };
+        assert_eq!(vec4.length(), 10.0);
     }
 
     #[test]

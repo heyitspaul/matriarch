@@ -79,6 +79,11 @@ impl Vec3 {
             z: (self.x * other_vec3.y) - (self.y * other_vec3.x)
         }
     }
+
+    /// Returns the length of the Vec3.
+    pub fn length(&self) -> f32 {
+        f32::sqrt(self.x.powi(2) + self.y.powi(2) + self.z.powi(2))
+    }
 }
 
 impl ops::Add<Vec3> for Vec3 {
@@ -249,6 +254,12 @@ mod tests {
         let v1 = Vec3 { x: 2.0, y: 4.5, z: 0.0 };
         let v2 = Vec3 { x: 3.0, y: 1.5, z: 4.0 };
         assert_eq!(v1.cross_product(&v2), Vec3 { x: 18.0, y: -8.0, z: -10.5 })
+    }
+
+    #[test]
+    fn get_vec3_length() {
+        let vec3 = Vec3 { x: 2.0, y: 3.0, z: 6.0 };
+        assert_eq!(vec3.length(), 7.0);
     }
 
     #[test]
