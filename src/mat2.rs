@@ -129,10 +129,75 @@ mod tests {
     use ::Mat2;
 
     #[test]
+    fn create_new_mat2() {
+        assert_eq!(Mat2::new(), Mat2 { a: 0.0, b: 0.0, c: 0.0, d: 0.0 });
+    }
+
+    #[test]
+    fn create_new_mat2_identity() {
+        assert_eq!(Mat2::identity(), Mat2{ a: 1.0, b: 0.0, c: 0.0, d: 1.0 });
+    }
+
+    #[test]
+    fn create_new_mat2_from_values() {
+        assert_eq!(Mat2::new_from_values(&1.0, &2.0, &3.0, &4.0), Mat2 { a: 1.0, b: 2.0, c: 3.0, d: 4.0 });
+    }
+
+    #[test]
+    fn create_new_mat2_from_array() {
+        let values = [ 1.0, 2.0, 3.0, 4.0 ];
+        let mat2 = Mat2::new_from_array(&values);
+        assert_eq!(mat2, Mat2{ a: 1.0, b: 2.0, c: 3.0, d: 4.0 });
+    }
+
+    #[test]
+    fn create_new_mat2_from_col_array() {
+        let values = [ 1.0, 2.0, 3.0, 4.0 ];
+        let mat2 = Mat2::new_from_col_array(&values);
+        assert_eq!(mat2, Mat2{ a: 1.0, c: 2.0, b: 3.0, d: 4.0 });
+    }
+
+    #[test]
+    fn mat2_to_array() {
+        let mat2 = Mat2 { a: 1.0, b: 2.0, c: 3.0, d: 4.0 };
+        let array = mat2.to_array();
+        assert_eq!(array, [1.0, 2.0, 3.0, 4.0]);
+    }
+
+    #[test]
+    fn mat2_to_col_array() {
+        let mat2 = Mat2 { a: 1.0, b: 2.0, c: 3.0, d: 4.0 };
+        let array = mat2.to_col_array();
+        assert_eq!(array, [1.0, 3.0, 2.0, 4.0]);
+    }
+
+    #[test]
+    fn mat2_to_vec2_array() {
+        let mat2 = Mat2 { a: 1.0, b: 2.0, c: 3.0, d: 4.0 };
+        let array = mat2.to_vec2_array();
+        let other_array = [ Vec2 { x: 1.0, y: 3.0 }, Vec2 { x: 2.0, y: 4.0} ];
+        assert_eq!(array, other_array);
+    }
+
+    #[test]
     fn multiply_by_identity() {
         let mat2 = Mat2::new_from_values(&2.0, &3.0, &4.0, &5.0);
         let iden = Mat2::identity();
         assert_eq!(mat2 * iden, mat2);
+    }
+
+    #[test]
+    fn mat2_multiplication() {
+        let mat2 = Mat2::new_from_values(&1.0, &2.0, &1.0, &3.0);
+        let other_mat2 = Mat2::new_from_values(&1.5, &2.25, &1.25, &2.0);
+        assert_eq!(mat2 * other_mat2, Mat2::new_from_values(&4.0, &6.25, &5.25, &8.25));
+    }
+
+    #[test]
+    fn mat2_scalar_multiplication() {
+        let scalar = 2.0;
+        let mat2 = Mat2::new_from_values(&1.0, &3.0, &1.5, &2.0);
+        assert_eq!(scalar * mat2, Mat2::new_from_values(&2.0, &6.0, &3.0, &4.0));
     }
 
     #[test]
