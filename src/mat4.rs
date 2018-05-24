@@ -165,7 +165,7 @@ mod tests {
     }
 
     #[test]
-    fn multiply_mat4_by_mat4() {
+    fn multiply_mat4_by_vec4() {
         let array = [ 1.5, 8.0, 2.0, 2.5, 10.0, 4.0, 4.0, 10.0, 3.5, 6.0, 7.0, 0.0, 7.0, 4.0, 2.0, 1.0 ];
         let mat4 = Mat4::new_from_array(&array);
         let vec4 = Vec4::new_from_values(&8.0, &5.0, &0.0, &5.0);
