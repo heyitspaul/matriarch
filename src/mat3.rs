@@ -78,6 +78,19 @@ impl Mat3 {
 impl ops::Mul<Mat3> for Mat3 {
     type Output = Mat3;
 
+    /// Multiplies two Mat3s together, returning a new Mat3.
+    /// 
+    /// Keep in mind that matrix multiplication is not commutative, such that
+    /// `A*B != B*A` for *most* matrices (the main exception being the Identity
+    /// matrix)
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Mat3;
+    /// # let mat3 = Mat3::new();
+    /// # let some_other_mat3 = Mat3::new();
+    /// let some_mat3 = mat3 * some_other_mat3;
+    /// ```
     fn mul(self, other_mat3: Mat3) -> Mat3 {
         Mat3 {
             a: (self.a * other_mat3.a) + (self.b * other_mat3.d) + (self.c * other_mat3.g),

@@ -91,6 +91,19 @@ impl Mat4 {
 impl ops::Mul<Mat4> for Mat4 {
     type Output = Mat4;
 
+    /// Multiplies two Mat4s together, returning a new Mat4.
+    /// 
+    /// Keep in mind that matrix multiplication is not commutative, such that
+    /// `A*B != B*A` for *most* matrices (the main exception being the Identity
+    /// matrix)
+    /// 
+    /// Example:
+    /// ```
+    /// # use matriarch::Mat4;
+    /// # let mat4 = Mat4::new();
+    /// # let some_other_mat4 = Mat4::new();
+    /// let some_mat4 = mat4 * some_other_mat4;
+    /// ```
     fn mul(self, mat4: Mat4) -> Mat4 {
         Mat4 {
             a: (self.a * mat4.a) + (self.b * mat4.e) + (self.c * mat4.i) + (self.d * mat4.m),

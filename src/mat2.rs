@@ -73,12 +73,16 @@ impl ops::Mul<Mat2> for Mat2 {
 
     /// Multiplies two Mat2s together, returning a new Mat2.
     /// 
+    /// Keep in mind that matrix multiplication is not commutative, such that
+    /// `A*B != B*A` for *most* matrices (the main exception being the Identity
+    /// matrix)
+    /// 
     /// Example:
     /// ```
     /// # use matriarch::Mat2;
     /// # let mat2 = Mat2::new();
-    /// # let identity = Mat2::identity();
-    /// let some_mat2 = mat2 * identity;
+    /// # let some_other_mat2 = Mat2::new();
+    /// let some_mat2 = mat2 * some_other_mat2;
     /// ```
     fn mul(self, other_mat2: Mat2) -> Mat2 {
         Mat2 {
