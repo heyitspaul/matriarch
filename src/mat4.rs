@@ -86,6 +86,21 @@ impl Mat4 {
             Vec4 { x: self.d, y: self.h, z: self.l, w: self.p },
         ]
     }
+
+    pub fn determinant(&self) -> f32 {
+        (self.a * self.f * self.k * self.p) - (self.a * self.f * self.l * self.o) - 
+        (self.a * self.g * self.j * self.p) + (self.a * self.g * self.l * self.n) +
+        (self.a * self.h * self.j * self.o) - (self.a * self.h * self.k * self.n) -
+        (self.b * self.e * self.k * self.p) + (self.b * self.e * self.l * self.o) +
+        (self.b * self.g * self.i * self.p) - (self.b * self.g * self.l * self.m) -
+        (self.b * self.h * self.i * self.o) + (self.b * self.h * self.k * self.m) +
+        (self.c * self.e * self.j * self.p) - (self.c * self.e * self.l * self.n) -
+        (self.c * self.f * self.i * self.p) + (self.c * self.f * self.l * self.m) +
+        (self.c * self.h * self.i * self.n) - (self.c * self.h * self.j * self.m) -
+        (self.d * self.e * self.j * self.o) + (self.d * self.e * self.k * self.n) +
+        (self.d * self.f * self.i * self.o) - (self.d * self.f * self.k * self.m) -
+        (self.d * self.g * self.i * self.n) + (self.d * self.g * self.j * self.m)
+    }
 }
 
 impl ops::Mul<Mat4> for Mat4 {
@@ -168,6 +183,13 @@ impl ops::Mul<Mat4> for f32 {
 mod tests {
     use ::Vec4;
     use ::Mat4;
+
+    #[test]
+    fn get_determinant_of_mat4() {
+        let array = [ 2.0, 3.0, 5.0, -1.0, 7.0, 1.0, 2.0, 0.0, 5.0, 1.0, 0.0, 2.5, 8.0, 1.0, 1.0, 3.25 ];
+        let mat4 = Mat4::new_from_array(&array);
+        assert_eq!(mat4.determinant(), 63.0);
+    }
 
     #[test]
     fn multiply_by_identity() {

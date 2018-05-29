@@ -66,6 +66,10 @@ impl Mat2 {
             Vec2 { x: self.b, y: self.d }
         ]
     }
+
+    pub fn determinant(&self) -> f32 {
+        (self.a * self.d) - (self.b * self.c)
+    }
 }
 
 impl ops::Mul<Mat2> for Mat2 {
@@ -181,6 +185,12 @@ mod tests {
         let array = mat2.to_vec2_array();
         let other_array = [ Vec2 { x: 1.0, y: 3.0 }, Vec2 { x: 2.0, y: 4.0} ];
         assert_eq!(array, other_array);
+    }
+
+    #[test]
+    fn get_determinant_of_mat2() {
+        let mat2 = Mat2 { a: 2.0, b: 3.0, c: 7.0, d: 1.0 };
+        assert_eq!(mat2.determinant(), -19.0);
     }
 
     #[test]

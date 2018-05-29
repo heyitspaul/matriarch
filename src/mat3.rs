@@ -73,6 +73,11 @@ impl Mat3 {
             Vec3 { x: self.c, y: self.f, z: self.i }
         ]
     }
+
+    pub fn determinant(&self) -> f32 {
+        (self.a * self.e * self.i) + (self.b * self.f * self.g) + (self.c * self.d * self.h)
+        - (self.c * self.e * self.g) - (self.b * self.d * self.i) - (self.a * self.f * self.h)
+    }
 }
 
 impl ops::Mul<Mat3> for Mat3 {
@@ -140,6 +145,13 @@ impl ops::Mul<Mat3> for f32 {
 mod tests {
     use ::Vec3;
     use ::Mat3;
+
+    #[test]
+    fn get_determinant_of_mat3() {
+        let array = [ 2.0, 3.0, 5.0, 7.0, 1.0, 2.0, 5.0, 1.0, 0.0 ];
+        let mat3 = Mat3::new_from_array(&array);
+        assert_eq!(mat3.determinant(), 36.0);
+    }
 
     #[test]
     fn multiply_by_identity() {
