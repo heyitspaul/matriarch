@@ -1,10 +1,8 @@
 #![feature(test)]
 extern crate test;
-extern crate rand;
 extern crate matriarch;
 
 use test::Bencher;
-use rand::Rng;
 use matriarch::Mat4;
 
 fn raw_mul_add(first_mat4: Mat4, mat4: Mat4) -> Mat4 {
