@@ -75,8 +75,18 @@ impl Mat3 {
     }
 
     pub fn determinant(&self) -> f32 {
-        (self.a * self.e * self.i) + (self.b * self.f * self.g) + (self.c * self.d * self.h)
-        - (self.c * self.e * self.g) - (self.b * self.d * self.i) - (self.a * self.f * self.h)
+        // We're applying the same optimization here as in the Mat4 determinant
+        (self.a * (
+            (self.e * self.i) - (self.f * self.h)
+        ))
+
+        + (self.b * (
+            (self.f * self.g) - (self.d * self.i)
+        ))
+        
+        + (self.c * (
+            (self.d * self.h) - (self.e * self.g)
+        ))
     }
 }
 
