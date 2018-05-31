@@ -83,10 +83,18 @@ impl Mat3 {
         + (self.b * (
             (self.f * self.g) - (self.d * self.i)
         ))
-        
+
         + (self.c * (
             (self.d * self.h) - (self.e * self.g)
         ))
+    }
+
+    pub fn transpose(&self) -> Mat3 {
+        Mat3{
+            a: self.a, b: self.d, c: self.g,
+            d: self.b, e: self.e, f: self.h,
+            g: self.c, h: self.f, i: self.i
+        }
     }
 }
 

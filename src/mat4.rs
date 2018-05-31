@@ -121,6 +121,15 @@ impl Mat4 {
             + (self.m * ( - (self.f * self.k) + (self.g * self.j) ) )
         ))
     }
+
+    pub fn transpose(&self) -> Mat4 {
+        Mat4 {
+            a: self.a, b: self.e, c: self.i, d: self.m,
+            e: self.b, f: self.f, g: self.j, h: self.n,
+            i: self.c, j: self.g, k: self.k, l: self.o,
+            m: self.d, n: self.h, o: self.l, p: self.p
+        }
+    }
 }
 
 impl ops::Mul<Mat4> for Mat4 {

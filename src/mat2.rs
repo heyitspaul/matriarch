@@ -70,6 +70,13 @@ impl Mat2 {
     pub fn determinant(&self) -> f32 {
         (self.a * self.d) - (self.b * self.c)
     }
+
+    pub fn transpose(&self) -> Mat2 {
+        Mat2 {
+            a: self.a, b: self.c,
+            c: self.b, d: self.d
+        }
+    }
 }
 
 impl ops::Mul<Mat2> for Mat2 {
