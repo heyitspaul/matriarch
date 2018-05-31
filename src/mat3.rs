@@ -165,10 +165,105 @@ mod tests {
     use ::Mat3;
 
     #[test]
+    fn create_new_mat3() {
+        assert_eq!(Mat3::new(), 
+            Mat3 {
+                a: 0.0, b: 0.0, c: 0.0,
+                d: 0.0, e: 0.0, f: 0.0,
+                g: 0.0, h: 0.0, i: 0.0
+            });
+    }
+
+    #[test]
+    fn create_new_mat3_identity() {
+        assert_eq!(Mat3::identity(), 
+            Mat3 {
+                a: 1.0, b: 0.0, c: 0.0,
+                d: 0.0, e: 1.0, f: 0.0,
+                g: 0.0, h: 0.0, i: 1.0
+            });
+    }
+
+    #[test]
+    fn create_new_mat3_from_values() {
+        assert_eq!(Mat3::new_from_values(&1.0, &2.0, &3.0, &4.0, &5.0, &6.0, &7.0, &8.0, &9.0), 
+            Mat3 {
+                a: 1.0, b: 2.0, c: 3.0,
+                d: 4.0, e: 5.0, f: 6.0,
+                g: 7.0, h: 8.0, i: 9.0
+            });
+    }
+
+    #[test]
+    fn create_new_mat3_from_array() {
+        let array = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ];
+        assert_eq!(Mat3::new_from_array(&array), 
+            Mat3 {
+                a: 1.0, b: 2.0, c: 3.0,
+                d: 4.0, e: 5.0, f: 6.0,
+                g: 7.0, h: 8.0, i: 9.0
+            });
+    }
+
+    #[test]
+    fn create_new_mat3_from_col_array() {
+        let array = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ];
+        assert_eq!(Mat3::new_from_col_array(&array), 
+            Mat3 {
+                a: 1.0, b: 4.0, c: 7.0,
+                d: 2.0, e: 5.0, f: 8.0,
+                g: 3.0, h: 6.0, i: 9.0
+            });
+    }
+
+    #[test]
+    fn mat3_to_array() {
+        let mat3 = Mat3 {
+            a: 1.0, b: 2.0, c: 3.0,
+            d: 4.0, e: 5.0, f: 6.0,
+            g: 7.0, h: 8.0, i: 9.0
+        };
+        assert_eq!(mat3.to_array(), [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ]);
+    }
+
+    #[test]
+    fn mat3_to_col_array() {
+        let mat3 = Mat3 {
+            a: 1.0, b: 2.0, c: 3.0,
+            d: 4.0, e: 5.0, f: 6.0,
+            g: 7.0, h: 8.0, i: 9.0
+        };
+        assert_eq!(mat3.to_col_array(), [ 1.0, 4.0, 7.0, 2.0, 5.0, 8.0, 3.0, 6.0, 9.0 ]);
+    }
+
+    #[test]
+    fn mat3_to_vec3_array() {
+        let mat3 = Mat3 {
+            a: 1.0, b: 2.0, c: 3.0,
+            d: 4.0, e: 5.0, f: 6.0,
+            g: 7.0, h: 8.0, i: 9.0
+        };
+        let array = mat3.to_vec3_array();
+        let other_array = [
+            Vec3 { x: 1.0, y: 4.0, z: 7.0 },
+            Vec3 { x: 2.0, y: 5.0, z: 8.0 },
+            Vec3 { x: 3.0, y: 6.0, z: 9.0 }
+        ];
+        assert_eq!(array, other_array);
+    }
+
+    #[test]
     fn get_determinant_of_mat3() {
         let array = [ 2.0, 3.0, 5.0, 7.0, 1.0, 2.0, 5.0, 1.0, 0.0 ];
         let mat3 = Mat3::new_from_array(&array);
         assert_eq!(mat3.determinant(), 36.0);
+    }
+
+    #[test]
+    fn get_determinant_equal_to_zero() {
+        let array = [ 2.0, 3.0, 4.0, 4.0, 6.0, 8.0, 1.0, 2.0, 5.0 ];
+        let mat3 = Mat3::new_from_array(&array);
+        assert_eq!(mat3.determinant(), 0.0);
     }
 
     #[test]
@@ -177,6 +272,33 @@ mod tests {
         let mat3 = Mat3::new_from_array(&array);
         let iden = Mat3::identity();
         assert_eq!(mat3 * iden, mat3);
+    }
+
+    #[test]
+    fn mat3_multiplication() {
+        let array = [ -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0 ];
+        let mat3 = Mat3::new_from_array(&array);
+        let other_array = [ 1.0, 2.5, 2.0, 9.5, 8.0, 0.0, 1.0, 1.0, 6.5 ];
+        let other_mat3 = Mat3::new_from_array(&other_array);
+        assert_eq!(mat3 * other_mat3,
+            Mat3 {
+                a: -34.5, b: -36.0, c: -21.0,
+                d:   0.0, e:  -1.5, f:   4.5,
+                g:  34.5, h:  33.0, i:  30.0
+            });
+    }
+
+    #[test]
+    fn mat3_scalar_multiplication() {
+        let scalar = 2.0;
+        let array = [ -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0 ];
+        let mat3 = Mat3::new_from_array(&array);
+        assert_eq!(scalar * mat3, 
+            Mat3 {
+                a: -8.0, b: -6.0, c: -4.0,
+                d: -2.0, e:  0.0, f:  2.0,
+                g:  4.0, h:  6.0, i:  8.0
+            });
     }
 
     #[test]

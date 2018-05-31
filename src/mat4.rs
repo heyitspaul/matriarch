@@ -214,10 +214,102 @@ mod tests {
     use ::Mat4;
 
     #[test]
+    fn create_new_mat4() {
+        assert_eq!(Mat4::new(),
+            Mat4{
+                a: 0.0, b: 0.0, c: 0.0, d: 0.0,
+                e: 0.0, f: 0.0, g: 0.0, h: 0.0,
+                i: 0.0, j: 0.0, k: 0.0, l: 0.0,
+                m: 0.0, n: 0.0, o: 0.0, p: 0.0
+            });
+    }
+
+    #[test]
+    fn create_new_mat4_identity() {
+        assert_eq!(Mat4::identity(),
+            Mat4{
+                a: 1.0, b: 0.0, c: 0.0, d: 0.0,
+                e: 0.0, f: 1.0, g: 0.0, h: 0.0,
+                i: 0.0, j: 0.0, k: 1.0, l: 0.0,
+                m: 0.0, n: 0.0, o: 0.0, p: 1.0
+            });
+    }
+
+    #[test]
+    fn create_new_mat4_from_array() {
+        let array = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 ];
+        assert_eq!(Mat4::new_from_array(&array),
+            Mat4 {
+                a:  1.0, b:  2.0, c:  3.0, d:  4.0,
+                e:  5.0, f:  6.0, g:  7.0, h:  8.0,
+                i:  9.0, j: 10.0, k: 11.0, l: 12.0,
+                m: 13.0, n: 14.0, o: 15.0, p: 16.0
+            });
+    }
+
+    #[test]
+    fn create_new_mat4_from_col_array() {
+        let array = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 ];
+        assert_eq!(Mat4::new_from_col_array(&array),
+            Mat4 {
+                a: 1.0, b: 5.0, c:  9.0, d: 13.0,
+                e: 2.0, f: 6.0, g: 10.0, h: 14.0,
+                i: 3.0, j: 7.0, k: 11.0, l: 15.0,
+                m: 4.0, n: 8.0, o: 12.0, p: 16.0
+            });
+    }
+
+    #[test]
+    fn mat4_to_array() {
+        let mat4 = Mat4 {
+            a:  1.0, b:  2.0, c:  3.0, d:  4.0,
+            e:  5.0, f:  6.0, g:  7.0, h:  8.0,
+            i:  9.0, j: 10.0, k: 11.0, l: 12.0,
+            m: 13.0, n: 14.0, o: 15.0, p: 16.0
+        };
+        assert_eq!(mat4.to_array(), [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 ]);
+    }
+
+    #[test]
+    fn mat4_to_col_array() {
+        let mat4 = Mat4 {
+            a:  1.0, b:  2.0, c:  3.0, d:  4.0,
+            e:  5.0, f:  6.0, g:  7.0, h:  8.0,
+            i:  9.0, j: 10.0, k: 11.0, l: 12.0,
+            m: 13.0, n: 14.0, o: 15.0, p: 16.0
+        };
+        assert_eq!(mat4.to_col_array(), [ 1.0, 5.0, 9.0, 13.0, 2.0, 6.0, 10.0, 14.0, 3.0, 7.0, 11.0, 15.0, 4.0, 8.0, 12.0, 16.0 ]);
+    }
+
+    #[test]
+    fn mat4_to_vec4_array() {
+        let mat4 = Mat4 {
+            a:  1.0, b:  2.0, c:  3.0, d:  4.0,
+            e:  5.0, f:  6.0, g:  7.0, h:  8.0,
+            i:  9.0, j: 10.0, k: 11.0, l: 12.0,
+            m: 13.0, n: 14.0, o: 15.0, p: 16.0
+        };
+        let array = [
+            Vec4 { x: 1.0, y: 5.0, z: 9.0, w: 13.0 },
+            Vec4 { x: 2.0, y: 6.0, z: 10.0, w: 14.0 },
+            Vec4 { x: 3.0, y: 7.0, z: 11.0, w: 15.0 },
+            Vec4 { x: 4.0, y: 8.0, z: 12.0, w: 16.0 }
+        ];
+        assert_eq!(mat4.to_vec4_array(), array);
+    }
+
+    #[test]
     fn get_determinant_of_mat4() {
         let array = [ 2.0, 3.0, 5.0, -1.0, 7.0, 1.0, 2.0, 0.0, 5.0, 1.0, 0.0, 2.5, 8.0, 1.0, 1.0, 3.25 ];
         let mat4 = Mat4::new_from_array(&array);
         assert_eq!(mat4.determinant(), 63.0);
+    }
+
+    #[test]
+    fn get_determinant_equal_to_zero() {
+        let array = [1.0, 2.0, 3.0, 4.0, 2.0, 4.0, 6.0, 8.0, 1.0, 2.25, 4.0, 7.0, 12.0, 2.0, 4.0, -3.0 ];
+        let mat4 = Mat4::new_from_array(&array);
+        assert_eq!(mat4.determinant(), 0.0);
     }
 
     #[test]
@@ -226,6 +318,35 @@ mod tests {
         let mat4 = Mat4::new_from_array(&array);
         let iden = Mat4::identity();
         assert_eq!(mat4 * iden, mat4);
+    }
+
+    #[test]
+    fn mat4_multiplication() {
+        let array = [ -8.0, -7.0, -6.0, -5.0, -4.0, -3.0, -2.0, -1.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 ];
+        let mat4 = Mat4::new_from_array(&array);
+        let other_array = [ 1.0, 10.0, 8.0, 0.0, -6.0, -1.0, -5.0, -4.0, 14.0, 15.0, 14.0, 2.0, -8.0, -4.0, 7.0, 2.0 ];
+        let other_mat4 = Mat4::new_from_array(&other_array);
+        assert_eq!(mat4 * other_mat4,
+            Mat4 {
+                a: -10.0, b: -143.0, c: -148.0, d: 6.0,
+                e:  -6.0, f:  -63.0, g:  -52.0, h: 6.0,
+                i:  -1.0, j:   37.0, k:   68.0, l: 6.0,
+                m:   3.0, n:  117.0, o:  164.0, p: 6.0
+            });
+    }
+
+    #[test]
+    fn mat4_scalar_multiplication() {
+        let scalar = 2.0;
+        let array = [ -8.0, -7.0, -6.0, -5.0, -4.0, -3.0, -2.0, -1.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 ];
+        let mat4 = Mat4::new_from_array(&array);
+        assert_eq!(scalar * mat4, 
+            Mat4 {
+                a: -16.0, b: -14.0, c: -12.0, d: -10.0,
+                e:  -8.0, f:  -6.0, g:  -4.0, h:  -2.0,
+                i:   2.0, j:   4.0, k:   6.0, l:   8.0,
+                m:  10.0, n:  12.0, o:  14.0, p:  16.0
+            });
     }
 
     #[test]

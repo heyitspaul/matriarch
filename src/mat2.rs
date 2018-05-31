@@ -201,6 +201,12 @@ mod tests {
     }
 
     #[test]
+    fn get_determinant_equal_to_zero() {
+        let mat2 = Mat2 { a: 2.0, b: 3.0, c: 4.0, d: 6.0 };
+        assert_eq!(mat2.determinant(), 0.0);
+    }
+
+    #[test]
     fn multiply_by_identity() {
         let mat2 = Mat2::new_from_values(&2.0, &3.0, &4.0, &5.0);
         let iden = Mat2::identity();
