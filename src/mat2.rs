@@ -1,7 +1,18 @@
+//! Implementation of a 2x2 Matrix and its associated functions.
+
 use std::ops;
 
 use ::Vec2;
 
+/// A 2x2 Matrix with elements arranged in row-major order.
+/// 
+/// A Mat2 is laid out as follows:
+/// 
+/// ```plaintext
+///     [ a  b ]
+/// A = [ c  d ]
+/// ```
+/// 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Mat2 {
     pub a: f32,
@@ -28,6 +39,7 @@ impl Mat2 {
         }
     }
 
+    /// Creates a new Mat2 using the borrowed values.
     pub fn new_from_values(a: &f32, b: &f32, c: &f32, d: &f32) -> Mat2 {
         Mat2 {
             a: *a, b: *b,
@@ -35,6 +47,7 @@ impl Mat2 {
         }
     }
 
+    /// Creates a new Mat2 from a row-major ordered array.
     pub fn new_from_array(input: &[f32; 4]) -> Mat2 {
         Mat2 {
             a: input[0], b: input[1],
@@ -50,6 +63,7 @@ impl Mat2 {
         }
     }
 
+    /// Returns an array of the Mat2 elements in row-major order.
     pub fn to_array(&self) -> [f32; 4] {
         [ self.a, self.b, self.c, self.d ]
     }
@@ -67,10 +81,12 @@ impl Mat2 {
         ]
     }
 
+    /// Returns the determinant of a Mat2.
     pub fn determinant(&self) -> f32 {
         (self.a * self.d) - (self.b * self.c)
     }
 
+    /// Returns a new Mat2 that is the tranpose of the original Mat2.
     pub fn transpose(&self) -> Mat2 {
         Mat2 {
             a: self.a, b: self.c,
@@ -108,6 +124,7 @@ impl ops::Mul<Mat2> for Mat2 {
 impl ops::Mul<Vec2> for Mat2 {
     type Output = Vec2;
 
+    /// Multiplies a Mat2 by a Vec2, returning a Vec2.
     fn mul(self, vec2: Vec2) -> Vec2 {
         Vec2 {
             x: (self.a * vec2.x) + (self.b * vec2.y),
