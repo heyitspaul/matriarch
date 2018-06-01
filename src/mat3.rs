@@ -33,15 +33,6 @@ impl Mat3 {
         }
     }
 
-    pub fn new_from_values(a: &f32, b: &f32, c: &f32, d: &f32, e: &f32,
-            f: &f32, g: &f32, h: &f32, i: &f32) -> Mat3 {
-        Mat3 {
-            a: *a, b: *b, c: *c,
-            d: *d, e: *e, f: *f,
-            g: *g, h: *h, i: *i
-        }
-    }
-
     pub fn new_from_array(input: &[f32; 9]) -> Mat3 {
         Mat3 {
             a: input[0], b: input[1], c: input[2],
@@ -181,16 +172,6 @@ mod tests {
                 a: 1.0, b: 0.0, c: 0.0,
                 d: 0.0, e: 1.0, f: 0.0,
                 g: 0.0, h: 0.0, i: 1.0
-            });
-    }
-
-    #[test]
-    fn create_new_mat3_from_values() {
-        assert_eq!(Mat3::new_from_values(&1.0, &2.0, &3.0, &4.0, &5.0, &6.0, &7.0, &8.0, &9.0), 
-            Mat3 {
-                a: 1.0, b: 2.0, c: 3.0,
-                d: 4.0, e: 5.0, f: 6.0,
-                g: 7.0, h: 8.0, i: 9.0
             });
     }
 
