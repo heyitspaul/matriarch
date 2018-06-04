@@ -2,11 +2,17 @@
 //! 
 //! Matriarch is a Linear Algebra and Matrix library written in pure Rust.
 
+#[doc(hidden)]
 pub mod vec2;
+#[doc(hidden)]
 pub mod vec3;
+#[doc(hidden)]
 pub mod vec4;
+#[doc(hidden)]
 pub mod mat2;
+#[doc(hidden)]
 pub mod mat3;
+#[doc(hidden)]
 pub mod mat4;
 
 #[doc(inline)]
