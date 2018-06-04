@@ -29,9 +29,9 @@ fn main() {
 
 ## TODO
 
-* Implement the rest of the library
-* Implement Determinants, Eigen values, and Eigenvectors
-* Add OpenGL convenience functions (MVP, Ortho, etc.)
+* Implement the rest of the library (Quaternions)
+* Implement Eigen values and Eigenvectors
+* Add OpenGL convenience functions
 * Documentation
 * Crates.io release
 
