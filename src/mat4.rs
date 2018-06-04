@@ -1,7 +1,19 @@
+//! Implementation of a 4x4 Matrix and its associated functions and methods.
+
 use std::ops;
 
 use ::Vec4;
 
+/// A 4x4 Matrix with elements arraged in row-major order.
+/// 
+/// A Mat4 is laid out as follows:
+/// 
+/// ```plaintext
+///     [ a  b  c  d ]
+/// A = [ e  f  g  h ]
+///     [ i  j  k  l ]
+///     [ m  n  o  p ]
+/// ```
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Mat4 {
     pub a: f32,

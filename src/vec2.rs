@@ -1,7 +1,10 @@
+//! Implementation of a 2D Vector and its associated functions and methods.
+
 use std::ops;
 
 use ::Vec3;
 
+/// A 2D Vector with elements x and y
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vec2 {
     pub x: f32,

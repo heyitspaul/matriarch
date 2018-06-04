@@ -1,4 +1,4 @@
-//! Implementation of a 2x2 Matrix and its associated functions.
+//! Implementation of a 2x2 Matrix and its associated functions and methods.
 
 use std::ops;
 

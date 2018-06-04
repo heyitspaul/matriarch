@@ -1,5 +1,8 @@
+//! Implementation of a 3D Vector and its associated functions and methods.
+
 use std::ops;
 
+/// A 3D vector with elements x, y, and z
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vec3 {
     pub x: f32,

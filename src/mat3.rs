@@ -1,7 +1,18 @@
+//! Implementation of a 3x3 Matrix and its associated functions and methods.
+
 use std::ops;
 
 use ::Vec3;
 
+/// A 3x3 Matrix with elements arranged in row-major order.
+/// 
+/// A Mat3 is laid out as follows:
+/// 
+/// ```plaintext
+///     [ a  b  c ]
+/// A = [ d  e  f ] 
+///     [ g  h  i ]
+/// ```
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Mat3 {
     pub a: f32,

@@ -1,5 +1,8 @@
+//! Implementation of a 4D Vector and its associated functions and methods.
+
 use std::ops;
 
+/// A 4D Vector with elements x, y, z, and w
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vec4 {
     pub x: f32,
