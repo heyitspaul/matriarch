@@ -65,8 +65,8 @@ impl Vec2 {
     /// component of 0.
     /// 
     /// We technically can't actually cross-multiply 2 vectors
-    /// in R^2, however we can add a z component of 0 and pretend the vectors 
-    /// are in R^3 instead, which is why we get a Vec3 at the end.
+    /// in ℝ², however we can add a z component of 0 and pretend the vectors 
+    /// are in ℝ³ instead, which is why we get a Vec3 at the end.
     /// 
     /// Example:
     /// ```
