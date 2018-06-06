@@ -2,15 +2,15 @@
 
 use std::ops;
 
-use ::Vec3;
+use Vec3;
 
 /// A 3x3 Matrix with elements arranged in row-major order.
-/// 
+///
 /// A Mat3 is laid out as follows:
-/// 
+///
 /// ```plaintext
 ///     [ a  b  c ]
-/// A = [ d  e  f ] 
+/// A = [ d  e  f ]
 ///     [ g  h  i ]
 /// ```
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
@@ -27,7 +27,6 @@ pub struct Mat3 {
 }
 
 impl Mat3 {
-
     pub fn new() -> Mat3 {
         Mat3 {
             a: 0.0, b: 0.0, c: 0.0,
@@ -104,11 +103,11 @@ impl ops::Mul<Mat3> for Mat3 {
     type Output = Mat3;
 
     /// Multiplies two Mat3s together, returning a new Mat3.
-    /// 
+    ///
     /// Keep in mind that matrix multiplication is not commutative, such that
     /// `A*B != B*A` for *most* matrices (the main exception being the Identity
     /// matrix)
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Mat3;
@@ -126,7 +125,7 @@ impl ops::Mul<Mat3> for Mat3 {
             f: (self.d * other_mat3.c) + (self.e * other_mat3.f) + (self.f * other_mat3.i),
             g: (self.g * other_mat3.a) + (self.h * other_mat3.d) + (self.i * other_mat3.g),
             h: (self.g * other_mat3.b) + (self.h * other_mat3.e) + (self.i * other_mat3.h),
-            i: (self.g * other_mat3.c) + (self.h * other_mat3.f) + (self.i * other_mat3.i)
+            i: (self.g * other_mat3.c) + (self.h * other_mat3.f) + (self.i * other_mat3.i),
         }
     }
 }
@@ -138,7 +137,7 @@ impl ops::Mul<Vec3> for Mat3 {
         Vec3 {
             x: (self.a * vec3.x) + (self.b * vec3.y) + (self.c * vec3.z),
             y: (self.d * vec3.x) + (self.e * vec3.y) + (self.f * vec3.z),
-            z: (self.g * vec3.x) + (self.h * vec3.y) + (self.i * vec3.z)
+            z: (self.g * vec3.x) + (self.h * vec3.y) + (self.i * vec3.z),
         }
     }
 }
@@ -156,19 +155,20 @@ impl ops::Mul<Mat3> for f32 {
             f: self * mat3.f,
             g: self * mat3.g,
             h: self * mat3.h,
-            i: self * mat3.i
+            i: self * mat3.i,
         }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use ::Vec3;
-    use ::Mat3;
+    use Mat3;
+    use Vec3;
 
     #[test]
     fn create_new_mat3() {
-        assert_eq!(Mat3::new(), 
+        assert_eq!(
+            Mat3::new(),
             Mat3 {
                 a: 0.0, b: 0.0, c: 0.0,
                 d: 0.0, e: 0.0, f: 0.0,
@@ -178,7 +178,8 @@ mod tests {
 
     #[test]
     fn create_new_mat3_identity() {
-        assert_eq!(Mat3::identity(), 
+        assert_eq!(
+            Mat3::identity(),
             Mat3 {
                 a: 1.0, b: 0.0, c: 0.0,
                 d: 0.0, e: 1.0, f: 0.0,
@@ -188,8 +189,9 @@ mod tests {
 
     #[test]
     fn create_new_mat3_from_array() {
-        let array = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ];
-        assert_eq!(Mat3::new_from_array(&array), 
+        let array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
+        assert_eq!(
+            Mat3::new_from_array(&array),
             Mat3 {
                 a: 1.0, b: 2.0, c: 3.0,
                 d: 4.0, e: 5.0, f: 6.0,
@@ -199,8 +201,9 @@ mod tests {
 
     #[test]
     fn create_new_mat3_from_col_array() {
-        let array = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ];
-        assert_eq!(Mat3::new_from_col_array(&array), 
+        let array = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0];
+        assert_eq!(
+            Mat3::new_from_col_array(&array),
             Mat3 {
                 a: 1.0, b: 4.0, c: 7.0,
                 d: 2.0, e: 5.0, f: 8.0,
@@ -215,7 +218,10 @@ mod tests {
             d: 4.0, e: 5.0, f: 6.0,
             g: 7.0, h: 8.0, i: 9.0
         };
-        assert_eq!(mat3.to_array(), [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 ]);
+        assert_eq!(
+            mat3.to_array(),
+            [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]
+        );
     }
 
     #[test]
@@ -225,7 +231,10 @@ mod tests {
             d: 4.0, e: 5.0, f: 6.0,
             g: 7.0, h: 8.0, i: 9.0
         };
-        assert_eq!(mat3.to_col_array(), [ 1.0, 4.0, 7.0, 2.0, 5.0, 8.0, 3.0, 6.0, 9.0 ]);
+        assert_eq!(
+            mat3.to_col_array(),
+            [1.0, 4.0, 7.0, 2.0, 5.0, 8.0, 3.0, 6.0, 9.0]
+        );
     }
 
     #[test]
@@ -246,21 +255,21 @@ mod tests {
 
     #[test]
     fn get_determinant_of_mat3() {
-        let array = [ 2.0, 3.0, 5.0, 7.0, 1.0, 2.0, 5.0, 1.0, 0.0 ];
+        let array = [2.0, 3.0, 5.0, 7.0, 1.0, 2.0, 5.0, 1.0, 0.0];
         let mat3 = Mat3::new_from_array(&array);
         assert_eq!(mat3.determinant(), 36.0);
     }
 
     #[test]
     fn get_determinant_equal_to_zero() {
-        let array = [ 2.0, 3.0, 4.0, 4.0, 6.0, 8.0, 1.0, 2.0, 5.0 ];
+        let array = [2.0, 3.0, 4.0, 4.0, 6.0, 8.0, 1.0, 2.0, 5.0];
         let mat3 = Mat3::new_from_array(&array);
         assert_eq!(mat3.determinant(), 0.0);
     }
 
     #[test]
     fn multiply_by_identity() {
-        let array = [ 1.0, 2.5, 2.0, 9.5, 8.0, 0.0, 1.0, 1.0, 6.5 ];
+        let array = [1.0, 2.5, 2.0, 9.5, 8.0, 0.0, 1.0, 1.0, 6.5];
         let mat3 = Mat3::new_from_array(&array);
         let iden = Mat3::identity();
         assert_eq!(mat3 * iden, mat3);
@@ -268,11 +277,12 @@ mod tests {
 
     #[test]
     fn mat3_multiplication() {
-        let array = [ -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0 ];
+        let array = [-4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0];
         let mat3 = Mat3::new_from_array(&array);
-        let other_array = [ 1.0, 2.5, 2.0, 9.5, 8.0, 0.0, 1.0, 1.0, 6.5 ];
+        let other_array = [1.0, 2.5, 2.0, 9.5, 8.0, 0.0, 1.0, 1.0, 6.5];
         let other_mat3 = Mat3::new_from_array(&other_array);
-        assert_eq!(mat3 * other_mat3,
+        assert_eq!(
+            mat3 * other_mat3,
             Mat3 {
                 a: -34.5, b: -36.0, c: -21.0,
                 d:   0.0, e:  -1.5, f:   4.5,
@@ -283,9 +293,10 @@ mod tests {
     #[test]
     fn mat3_scalar_multiplication() {
         let scalar = 2.0;
-        let array = [ -4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0 ];
+        let array = [-4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0];
         let mat3 = Mat3::new_from_array(&array);
-        assert_eq!(scalar * mat3, 
+        assert_eq!(
+            scalar * mat3,
             Mat3 {
                 a: -8.0, b: -6.0, c: -4.0,
                 d: -2.0, e:  0.0, f:  2.0,
@@ -295,7 +306,7 @@ mod tests {
 
     #[test]
     fn multiply_mat3_by_vec3() {
-        let array = [ 1.0, 2.5, 2.0, 9.5, 8.0, 0.0, 1.0, 1.0, 6.5 ];
+        let array = [1.0, 2.5, 2.0, 9.5, 8.0, 0.0, 1.0, 1.0, 6.5];
         let mat3 = Mat3::new_from_array(&array);
         let vec3 = Vec3::new_from_values(&2.0, &2.5, &3.5);
         assert_eq!(mat3 * vec3, Vec3::new_from_values(&15.25, &39.0, &27.25));

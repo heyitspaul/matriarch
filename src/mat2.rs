@@ -2,7 +2,7 @@
 
 use std::ops;
 
-use ::Vec2;
+use Vec2;
 
 /// A 2x2 Matrix with elements arranged in row-major order.
 /// 
@@ -22,7 +22,6 @@ pub struct Mat2 {
 }
 
 impl Mat2 {
-    
     /// Returns a new array with all elements set to 0.0
     pub fn new() -> Mat2 {
         Mat2 {
@@ -65,12 +64,12 @@ impl Mat2 {
 
     /// Returns an array of the Mat2 elements in row-major order.
     pub fn to_array(&self) -> [f32; 4] {
-        [ self.a, self.b, self.c, self.d ]
+        [self.a, self.b, self.c, self.d]
     }
 
     /// Returns an array of the Mat2 elements in column-major order.
     pub fn to_col_array(&self) -> [f32; 4] {
-        [ self.a, self.c, self.b, self.d ]
+        [self.a, self.c, self.b, self.d]
     }
 
     /// Returns the matrix as an array of Vec2 columns
@@ -116,7 +115,7 @@ impl ops::Mul<Mat2> for Mat2 {
             a: (self.a * other_mat2.a) + (self.b * other_mat2.c),
             b: (self.a * other_mat2.b) + (self.b * other_mat2.d),
             c: (self.c * other_mat2.a) + (self.d * other_mat2.c),
-            d: (self.c * other_mat2.b) + (self.d * other_mat2.d)
+            d: (self.c * other_mat2.b) + (self.d * other_mat2.d),
         }
     }
 }
@@ -128,7 +127,7 @@ impl ops::Mul<Vec2> for Mat2 {
     fn mul(self, vec2: Vec2) -> Vec2 {
         Vec2 {
             x: (self.a * vec2.x) + (self.b * vec2.y),
-            y: (self.c * vec2.x) + (self.d * vec2.y)
+            y: (self.c * vec2.x) + (self.d * vec2.y),
         }
     }
 }
@@ -150,15 +149,15 @@ impl ops::Mul<Mat2> for f32 {
             a: self * mat2.a,
             b: self * mat2.b,
             c: self * mat2.c,
-            d: self * mat2.d
+            d: self * mat2.d,
         }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use ::Vec2;
-    use ::Mat2;
+    use Mat2;
+    use Vec2;
 
     #[test]
     fn create_new_mat2() {
@@ -177,14 +176,14 @@ mod tests {
 
     #[test]
     fn create_new_mat2_from_array() {
-        let values = [ 1.0, 2.0, 3.0, 4.0 ];
+        let values = [1.0, 2.0, 3.0, 4.0];
         let mat2 = Mat2::new_from_array(&values);
         assert_eq!(mat2, Mat2{ a: 1.0, b: 2.0, c: 3.0, d: 4.0 });
     }
 
     #[test]
     fn create_new_mat2_from_col_array() {
-        let values = [ 1.0, 2.0, 3.0, 4.0 ];
+        let values = [1.0, 2.0, 3.0, 4.0];
         let mat2 = Mat2::new_from_col_array(&values);
         assert_eq!(mat2, Mat2{ a: 1.0, c: 2.0, b: 3.0, d: 4.0 });
     }
@@ -207,7 +206,7 @@ mod tests {
     fn mat2_to_vec2_array() {
         let mat2 = Mat2 { a: 1.0, b: 2.0, c: 3.0, d: 4.0 };
         let array = mat2.to_vec2_array();
-        let other_array = [ Vec2 { x: 1.0, y: 3.0 }, Vec2 { x: 2.0, y: 4.0} ];
+        let other_array = [Vec2 { x: 1.0, y: 3.0 }, Vec2 { x: 2.0, y: 4.0 }];
         assert_eq!(array, other_array);
     }
 
@@ -234,7 +233,10 @@ mod tests {
     fn mat2_multiplication() {
         let mat2 = Mat2::new_from_values(&1.0, &2.0, &1.0, &3.0);
         let other_mat2 = Mat2::new_from_values(&1.5, &2.25, &1.25, &2.0);
-        assert_eq!(mat2 * other_mat2, Mat2::new_from_values(&4.0, &6.25, &5.25, &8.25));
+        assert_eq!(
+            mat2 * other_mat2,
+            Mat2::new_from_values(&4.0, &6.25, &5.25, &8.25)
+        );
     }
 
     #[test]

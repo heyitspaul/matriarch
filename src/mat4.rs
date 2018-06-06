@@ -2,12 +2,12 @@
 
 use std::ops;
 
-use ::Vec4;
+use Vec4;
 
 /// A 4x4 Matrix with elements arraged in row-major order.
-/// 
+///
 /// A Mat4 is laid out as follows:
-/// 
+///
 /// ```plaintext
 ///     [ a  b  c  d ]
 /// A = [ e  f  g  h ]
@@ -35,7 +35,6 @@ pub struct Mat4 {
 }
 
 impl Mat4 {
-
     pub fn new() -> Mat4 {
         Mat4 {
             a: 0.0, b: 0.0, c: 0.0, d: 0.0,
@@ -148,11 +147,11 @@ impl ops::Mul<Mat4> for Mat4 {
     type Output = Mat4;
 
     /// Multiplies two Mat4s together, returning a new Mat4.
-    /// 
+    ///
     /// Keep in mind that matrix multiplication is not commutative, such that
     /// `A*B != B*A` for *most* matrices (the main exception being the Identity
     /// matrix)
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Mat4;
@@ -215,15 +214,15 @@ impl ops::Mul<Mat4> for f32 {
             m: self * mat4.m,
             n: self * mat4.n,
             o: self * mat4.o,
-            p: self * mat4.p
+            p: self * mat4.p,
         }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use ::Vec4;
-    use ::Mat4;
+    use Mat4;
+    use Vec4;
 
     #[test]
     fn create_new_mat4() {
@@ -250,7 +249,8 @@ mod tests {
     #[test]
     fn create_new_mat4_from_array() {
         let array = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 ];
-        assert_eq!(Mat4::new_from_array(&array),
+        assert_eq!(
+            Mat4::new_from_array(&array),
             Mat4 {
                 a:  1.0, b:  2.0, c:  3.0, d:  4.0,
                 e:  5.0, f:  6.0, g:  7.0, h:  8.0,
@@ -262,7 +262,8 @@ mod tests {
     #[test]
     fn create_new_mat4_from_col_array() {
         let array = [ 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 ];
-        assert_eq!(Mat4::new_from_col_array(&array),
+        assert_eq!(
+            Mat4::new_from_col_array(&array),
             Mat4 {
                 a: 1.0, b: 5.0, c:  9.0, d: 13.0,
                 e: 2.0, f: 6.0, g: 10.0, h: 14.0,
@@ -338,7 +339,8 @@ mod tests {
         let mat4 = Mat4::new_from_array(&array);
         let other_array = [ 1.0, 10.0, 8.0, 0.0, -6.0, -1.0, -5.0, -4.0, 14.0, 15.0, 14.0, 2.0, -8.0, -4.0, 7.0, 2.0 ];
         let other_mat4 = Mat4::new_from_array(&other_array);
-        assert_eq!(mat4 * other_mat4,
+        assert_eq!(
+            mat4 * other_mat4,
             Mat4 {
                 a: -10.0, b: -143.0, c: -148.0, d: 6.0,
                 e:  -6.0, f:  -63.0, g:  -52.0, h: 6.0,
@@ -352,7 +354,8 @@ mod tests {
         let scalar = 2.0;
         let array = [ -8.0, -7.0, -6.0, -5.0, -4.0, -3.0, -2.0, -1.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0 ];
         let mat4 = Mat4::new_from_array(&array);
-        assert_eq!(scalar * mat4, 
+        assert_eq!(
+            scalar * mat4,
             Mat4 {
                 a: -16.0, b: -14.0, c: -12.0, d: -10.0,
                 e:  -8.0, f:  -6.0, g:  -4.0, h:  -2.0,
@@ -366,6 +369,9 @@ mod tests {
         let array = [ 1.5, 8.0, 2.0, 2.5, 10.0, 4.0, 4.0, 10.0, 3.5, 6.0, 7.0, 0.0, 7.0, 4.0, 2.0, 1.0 ];
         let mat4 = Mat4::new_from_array(&array);
         let vec4 = Vec4::new_from_values(&8.0, &5.0, &0.0, &5.0);
-        assert_eq!(mat4 * vec4, Vec4::new_from_values(&64.5, &150.0, &58.0, &81.0));
+        assert_eq!(
+            mat4 * vec4,
+            Vec4::new_from_values(&64.5, &150.0, &58.0, &81.0)
+        );
     }
 }

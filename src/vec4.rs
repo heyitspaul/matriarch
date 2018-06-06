@@ -8,11 +8,10 @@ pub struct Vec4 {
     pub x: f32,
     pub y: f32,
     pub z: f32,
-    pub w: f32
+    pub w: f32,
 }
 
 impl Vec4 {
-
     /// Returns a new Vec4 at [0, 0, 0, 0].
     pub fn new() -> Vec4 {
         Vec4 { x: 0.0, y: 0.0, z: 0.0, w: 0.0 }
@@ -30,14 +29,14 @@ impl Vec4 {
             x: input[0],
             y: input[1],
             z: input[2],
-            w: input[3]
+            w: input[3],
         }
     }
 
     /// Returns an array of the Vec4's x, y, z, and w values where x -> [0],
     /// y -> [1], z -> [2], and w -> [3].
     pub fn to_array(&self) -> [f32; 4] {
-        [ self.x, self.y, self.z, self.w ]
+        [self.x, self.y, self.z, self.w]
     }
 
     /// Returns the length of the Vec4.
@@ -61,7 +60,6 @@ impl ops::Add<Vec4> for Vec4 {
 }
 
 impl ops::AddAssign for Vec4 {
-
     /// Adds one Vec4 to another Vec4 and re-assigns the first Vec4 to the new
     /// Vec4.
     fn add_assign(&mut self, other_vec4: Vec4) {
@@ -122,7 +120,6 @@ impl ops::Sub<Vec4> for Vec4 {
 }
 
 impl ops::SubAssign for Vec4 {
-
     /// Subtracts one Vec4 from another Vec4 and re-assigns the first Vec4 to
     /// the new Vec4.
     fn sub_assign(&mut self, other_vec4: Vec4) {
@@ -137,7 +134,7 @@ impl ops::SubAssign for Vec4 {
 
 #[cfg(test)]
 mod tests {
-    use ::Vec4;
+    use Vec4;
 
     #[test]
     fn create_new_vec4() {
@@ -156,7 +153,7 @@ mod tests {
 
     #[test]
     fn create_new_vec4_from_array() {
-        let input_array = [ 1.0, 2.5, 5.5, 3.5 ];
+        let input_array = [1.0, 2.5, 5.5, 3.5];
         let vec = Vec4::new_from_array(&input_array);
         assert_eq!(vec, Vec4 { x: 1.0, y: 2.5, z: 5.5, w: 3.5 });
     }
@@ -165,7 +162,7 @@ mod tests {
     fn get_vec4_as_array() {
         let vec = Vec4 { x: 1.0, y: 3.5, z: 0.5, w: 2.25 };
         let array = vec.to_array();
-        assert_eq!(array, [ 1.0, 3.5, 0.5, 2.25 ]);
+        assert_eq!(array, [1.0, 3.5, 0.5, 2.25]);
     }
 
     #[test]

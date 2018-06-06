@@ -2,17 +2,16 @@
 
 use std::ops;
 
-use ::Vec3;
+use Vec3;
 
 /// A 2D Vector with elements x and y
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Vec2 {
     pub x: f32,
-    pub y: f32
+    pub y: f32,
 }
 
 impl Vec2 {
-
     /// Returns a new Vec2 at [0, 0].
     /// 
     /// Example:
@@ -59,7 +58,7 @@ impl Vec2 {
     /// let array = some_vec2.to_array();
     /// ```
     pub fn to_array(&self) -> [f32; 2] {
-        [ self.x, self.y ]
+        [self.x, self.y]
     }
 
     /// Returns the cross product of 2 Vec2s as if they were Vec3s with a z
@@ -85,7 +84,7 @@ impl Vec2 {
             // x and y instead.
             x: 0.0,
             y: 0.0,
-            z: (self.x * other_vec2.y) - (self.y * other_vec2.x)
+            z: (self.x * other_vec2.y) - (self.y * other_vec2.x),
         }
     }
 
@@ -110,13 +109,12 @@ impl ops::Add<Vec2> for Vec2 {
     fn add(self, other_vec2: Vec2) -> Vec2 {
         Vec2 {
             x: self.x + other_vec2.x,
-            y: self.y + other_vec2.y
+            y: self.y + other_vec2.y,
         }
     }
 }
 
 impl ops::AddAssign for Vec2 {
-
     /// Adds one Vec2 to another Vec2 and re-assigns the first Vec2 to the
     /// new Vec2.
     /// 
@@ -130,7 +128,7 @@ impl ops::AddAssign for Vec2 {
     fn add_assign(&mut self, other_vec2: Vec2) {
         *self = Vec2 {
             x: self.x + other_vec2.x,
-            y: self.y + other_vec2.y
+            y: self.y + other_vec2.y,
         };
     }
 }
@@ -150,7 +148,7 @@ impl ops::Mul<Vec2> for f32 {
     fn mul(self, other_vec2: Vec2) -> Vec2 {
         Vec2 {
             x: self * other_vec2.x,
-            y: self * other_vec2.y
+            y: self * other_vec2.y,
         }
     }
 }
@@ -203,13 +201,12 @@ impl ops::Sub<Vec2> for Vec2 {
     fn sub(self, other_vec2: Vec2) -> Vec2 {
         Vec2 {
             x: self.x - other_vec2.x,
-            y: self.y - other_vec2.y
+            y: self.y - other_vec2.y,
         }
     }
 }
 
 impl ops::SubAssign for Vec2 {
-
     /// Subtracts one Vec2 from another Vec2 and re-assigns the first Vec2 to
     /// the new Vec2.
     /// 
@@ -223,15 +220,15 @@ impl ops::SubAssign for Vec2 {
     fn sub_assign(&mut self, other_vec2: Vec2) {
         *self = Vec2 {
             x: self.x - other_vec2.x,
-            y: self.y - other_vec2.y
+            y: self.y - other_vec2.y,
         };
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use ::Vec2;
-    use ::Vec3;
+    use Vec2;
+    use Vec3;
 
     #[test]
     fn create_new_vec2() {
@@ -248,7 +245,7 @@ mod tests {
 
     #[test]
     fn create_new_vec2_from_array() {
-        let input_array = [ 1.0, 2.5 ];
+        let input_array = [1.0, 2.5];
         let vec = Vec2::new_from_array(&input_array);
         assert_eq!(vec, Vec2 { x: 1.0, y: 2.5 });
     }

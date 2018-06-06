@@ -7,13 +7,12 @@ use std::ops;
 pub struct Vec3 {
     pub x: f32,
     pub y: f32,
-    pub z: f32
+    pub z: f32,
 }
 
 impl Vec3 {
-
     /// Returns a new Vec3 at [0, 0, 0].
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -24,7 +23,7 @@ impl Vec3 {
     }
 
     /// Returns a new Vec3 using the given values for x, y, and z.
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -39,7 +38,7 @@ impl Vec3 {
 
     /// Returns a new Vec3 using the 0, 1, and 2 indices of the given array,
     /// where [0] -> x, [1] -> y, and [2] -> z.
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -52,7 +51,7 @@ impl Vec3 {
 
     /// Returns an array of the Vec3's x, y and z values where x -> [0],
     /// y -> [1], and z -> [2].
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -60,14 +59,14 @@ impl Vec3 {
     /// let array = some_vec3.to_array();
     /// ```
     pub fn to_array(&self) -> [f32; 3] {
-        [ self.x, self.y, self.z ]
+        [self.x, self.y, self.z]
     }
 
     /// Returns the cross product of 2 Vec3s as a Vec3.
-    /// 
+    ///
     /// The cross product of 2 Vec3s is defined as a Vec3 that is perpendicular
     /// to both Vec3s.
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -79,7 +78,7 @@ impl Vec3 {
         Vec3 {
             x: (self.y * other_vec3.z) - (self.z * other_vec3.y),
             y: (self.z * other_vec3.x) - (self.x * other_vec3.z),
-            z: (self.x * other_vec3.y) - (self.y * other_vec3.x)
+            z: (self.x * other_vec3.y) - (self.y * other_vec3.x),
         }
     }
 
@@ -93,7 +92,7 @@ impl ops::Add<Vec3> for Vec3 {
     type Output = Vec3;
 
     /// Adds one Vec3 to another Vec3 and returns a new Vec3.
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -105,16 +104,15 @@ impl ops::Add<Vec3> for Vec3 {
         Vec3 {
             x: self.x + other_vec3.x,
             y: self.y + other_vec3.y,
-            z: self.z + other_vec3.z
+            z: self.z + other_vec3.z,
         }
     }
 }
 
 impl ops::AddAssign for Vec3 {
-
     /// Adds one Vec3 to another Vec3 and re-assigns the first Vec3 to the new
     /// Vec3
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -126,7 +124,7 @@ impl ops::AddAssign for Vec3 {
         *self = Vec3 {
             x: self.x + other_vec3.x,
             y: self.y + other_vec3.y,
-            z: self.z + other_vec3.z
+            z: self.z + other_vec3.z,
         };
     }
 }
@@ -135,7 +133,7 @@ impl ops::Mul<Vec3> for f32 {
     type Output = Vec3;
 
     /// Multiplies a scalar value by a Vec3 and returns a Vec3.
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -147,7 +145,7 @@ impl ops::Mul<Vec3> for f32 {
         Vec3 {
             x: self * other_vec3.x,
             y: self * other_vec3.y,
-            z: self * other_vec3.z
+            z: self * other_vec3.z,
         }
     }
 }
@@ -156,7 +154,7 @@ impl ops::Mul<Vec3> for Vec3 {
     type Output = f32;
 
     /// Retuns the dot product of 2 Vec3s, which is a scalar floating point.
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -182,7 +180,7 @@ impl ops::Sub<Vec3> for Vec3 {
     type Output = Vec3;
 
     /// Subtracts one Vec3 from another Vec3 and returns a new Vec3.
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -194,16 +192,15 @@ impl ops::Sub<Vec3> for Vec3 {
         Vec3 {
             x: self.x - other_vec3.x,
             y: self.y - other_vec3.y,
-            z: self.z - other_vec3.z
+            z: self.z - other_vec3.z,
         }
     }
 }
 
 impl ops::SubAssign for Vec3 {
-    
     /// Subtracts one Vec3 from another Vec3 and re-assigns the first Vec3 to
     /// the new Vec3.
-    /// 
+    ///
     /// Example:
     /// ```
     /// # use matriarch::Vec3;
@@ -215,14 +212,14 @@ impl ops::SubAssign for Vec3 {
         *self = Vec3 {
             x: self.x - other_vec3.x,
             y: self.y - other_vec3.y,
-            z: self.z - other_vec3.z
+            z: self.z - other_vec3.z,
         };
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use ::Vec3;
+    use Vec3;
 
     #[test]
     fn create_new_vec3() {
@@ -240,7 +237,7 @@ mod tests {
 
     #[test]
     fn create_new_vec3_from_array() {
-        let input_array = [ 1.0, 2.5, 5.5 ];
+        let input_array = [1.0, 2.5, 5.5];
         let vec = Vec3::new_from_array(&input_array);
         assert_eq!(vec, Vec3 { x: 1.0, y: 2.5, z: 5.5 });
     }
