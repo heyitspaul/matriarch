@@ -4,8 +4,9 @@ version = "0.1.0"
 authors = ["Paul <theassailant@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
+description = "A Linear Algebra and Matrix library written in Rust."
 homepage = "https://github.com/theassailant/matriarch"
 repository = "https://github.com/theassailant/matriarch"
-keywords = ["math", "matrix multiplication", "linear algebra"]
+keywords = ["math", "matrix-multiply", "linear-algebra"]
 
 [dependencies]
