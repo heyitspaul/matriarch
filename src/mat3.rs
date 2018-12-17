@@ -2,7 +2,7 @@
 
 use std::ops;
 
-use Vec3;
+use super::Vec3;
 
 /// A 3x3 Matrix with elements arranged in row-major order.
 ///
@@ -162,8 +162,7 @@ impl ops::Mul<Mat3> for f32 {
 
 #[cfg(test)]
 mod tests {
-    use Mat3;
-    use Vec3;
+    use super::{Mat3, Vec3};
 
     #[test]
     fn create_new_mat3() {

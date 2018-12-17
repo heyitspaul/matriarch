@@ -219,7 +219,7 @@ impl ops::SubAssign for Vec3 {
 
 #[cfg(test)]
 mod tests {
-    use Vec3;
+    use super::Vec3;
 
     #[test]
     fn create_new_vec3() {

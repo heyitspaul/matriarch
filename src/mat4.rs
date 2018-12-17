@@ -2,7 +2,7 @@
 
 use std::ops;
 
-use Vec4;
+use super::Vec4;
 
 /// A 4x4 Matrix with elements arraged in row-major order.
 ///
@@ -221,8 +221,7 @@ impl ops::Mul<Mat4> for f32 {
 
 #[cfg(test)]
 mod tests {
-    use Mat4;
-    use Vec4;
+    use super::{Mat4, Vec4};
 
     #[test]
     fn create_new_mat4() {

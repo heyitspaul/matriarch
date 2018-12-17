@@ -2,7 +2,7 @@
 
 use std::ops;
 
-use Vec2;
+use super::Vec2;
 
 /// A 2x2 Matrix with elements arranged in row-major order.
 /// 
@@ -156,8 +156,7 @@ impl ops::Mul<Mat2> for f32 {
 
 #[cfg(test)]
 mod tests {
-    use Mat2;
-    use Vec2;
+    use super::{Mat2, Vec2};
 
     #[test]
     fn create_new_mat2() {

@@ -134,7 +134,7 @@ impl ops::SubAssign for Vec4 {
 
 #[cfg(test)]
 mod tests {
-    use Vec4;
+    use super::Vec4;
 
     #[test]
     fn create_new_vec4() {

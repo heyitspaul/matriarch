@@ -2,7 +2,7 @@
 
 use std::ops;
 
-use Vec3;
+use super::Vec3;
 
 /// A 2D Vector with elements x and y
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
@@ -227,8 +227,7 @@ impl ops::SubAssign for Vec2 {
 
 #[cfg(test)]
 mod tests {
-    use Vec2;
-    use Vec3;
+    use super::{Vec2, Vec3};
 
     #[test]
     fn create_new_vec2() {
