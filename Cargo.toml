@@ -11,3 +11,10 @@ repository = "https://github.com/theassailant/matriarch"
 keywords = ["math", "matrix-multiply", "linear-algebra"]
 
 [dependencies]
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "multiplication_optimization"
+harness = false
